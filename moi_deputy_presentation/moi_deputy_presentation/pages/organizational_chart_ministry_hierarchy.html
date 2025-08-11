@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الهيكل التنظيمي - وزارة الداخلية</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes drawLine {
+            from { stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 0; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-draw-line {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawLine 1s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+        .delay-4 { animation-delay: 1.2s; }
+        .delay-5 { animation-delay: 1.5s; }
+        .delay-6 { animation-delay: 1.8s; }
+        
+        .geometric-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
+            background-size: 200px 200px, 300px 300px, 60px 60px, 60px 60px;
+        }
+        
+        .slide-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1B365D 0%, #243B53 50%, #334E68 100%);
+        }
+        
+        .org-box {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .org-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .org-box-executive {
+            background: linear-gradient(135deg, #1B365D 0%, #243B53 100%);
+            border: 2px solid #D4AF37;
+        }
+        
+        .org-box-department {
+            background: linear-gradient(135deg, #007A3D 0%, #15803D 100%);
+            border: 2px solid rgba(212, 175, 55, 0.5);
+        }
+        
+        .org-box-operational {
+            background: linear-gradient(135deg, #4A5568 0%, #2D3748 100%);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .connection-line {
+            stroke: #D4AF37;
+            stroke-width: 2;
+            fill: none;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 250px;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tooltip.show {
+            opacity: 1;
+        }
+        
+        .progress-bar {
+            width: 22.22%; /* 2 of 9 slides */
+            transition: width 0.3s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(27, 54, 93, 0.3);
+        }
+        
+        .org-chart-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            gap: 20px;
+            height: 600px;
+            position: relative;
+        }
+        
+        .level-1 { grid-column: 6 / 8; grid-row: 1; }
+        .level-2-1 { grid-column: 3 / 5; grid-row: 3; }
+        .level-2-2 { grid-column: 6 / 8; grid-row: 3; }
+        .level-2-3 { grid-column: 9 / 11; grid-row: 3; }
+        .level-3-1 { grid-column: 1 / 3; grid-row: 5; }
+        .level-3-2 { grid-column: 3 / 5; grid-row: 5; }
+        .level-3-3 { grid-column: 5 / 7; grid-row: 5; }
+        .level-3-4 { grid-column: 7 / 9; grid-row: 5; }
+        .level-3-5 { grid-column: 9 / 11; grid-row: 5; }
+        .level-3-6 { grid-column: 11 / 13; grid-row: 5; }
+        .level-4-1 { grid-column: 2 / 4; grid-row: 7; }
+        .level-4-2 { grid-column: 4 / 6; grid-row: 7; }
+        .level-4-3 { grid-column: 6 / 8; grid-row: 7; }
+        .level-4-4 { grid-column: 8 / 10; grid-row: 7; }
+        .level-4-5 { grid-column: 10 / 12; grid-row: 7; }
+    </style>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmoideputy9736back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="font-body">
+    <!-- Main Slide Container -->
+    <div class="slide-container geometric-pattern relative overflow-hidden">
+        <!-- Header with Ministry Logo -->
+        <header class="absolute top-8 right-8 z-10">
+            <div class="flex items-center gap-4 animate-fade-in">
+                <!-- Ministry of Interior Logo -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 logo-glow">
+                    <svg width="80" height="80" viewBox="0 0 100 100" class="text-accent">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#CA8A04;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Shield Shape -->
+                        <path d="M50 10 L20 25 L20 60 Q20 80 50 90 Q80 80 80 60 L80 25 Z" fill="url(#logoGradient)" stroke="#1B365D" stroke-width="2"/>
+                        <!-- Interior Symbol -->
+                        <circle cx="50" cy="40" r="12" fill="#1B365D"/>
+                        <rect x="45" y="55" width="10" height="20" fill="#1B365D" rx="2"/>
+                        <!-- Arabic Text Placeholder -->
+                        <text x="50" y="85" text-anchor="middle" fill="#1B365D" font-size="8" font-weight="bold">MOI</text>
+                    </svg>
+                </div>
+                <!-- Kuwait National Emblem -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                    <svg width="60" height="60" viewBox="0 0 100 100" class="text-accent">
+                        <!-- Kuwait Emblem Simplified -->
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                        <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="url(#logoGradient)"/>
+                        <circle cx="50" cy="50" r="8" fill="#1B365D"/>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- Slide Title -->
+        <div class="absolute top-8 left-1/2 transform -translate-x-1/2 text-center animate-fade-in">
+            <h1 class="font-headline text-4xl font-bold text-white mb-2">الهيكل التنظيمي</h1>
+            <p class="text-accent text-lg">وزارة الداخلية - دولة الكويت</p>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex items-center justify-center min-h-screen px-8 pt-32 pb-24">
+            <div class="w-full max-w-7xl mx-auto">
+                <!-- Organizational Chart Container -->
+                <div class="org-chart-container animate-fade-in-up delay-1">
+                    <!-- SVG for Connection Lines -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1;">
+                        <!-- Deputy Minister to Assistant Deputies -->
+                        <line class="connection-line animate-draw-line delay-2" x1="50%" y1="12.5%" x2="25%" y2="37.5%"/>
+                        <line class="connection-line animate-draw-line delay-2" x1="50%" y1="12.5%" x2="50%" y2="37.5%"/>
+                        <line class="connection-line animate-draw-line delay-2" x1="50%" y1="12.5%" x2="75%" y2="37.5%"/>
+                        
+                        <!-- Assistant Deputies to Department Heads -->
+                        <line class="connection-line animate-draw-line delay-3" x1="25%" y1="37.5%" x2="16.67%" y2="62.5%"/>
+                        <line class="connection-line animate-draw-line delay-3" x1="25%" y1="37.5%" x2="33.33%" y2="62.5%"/>
+                        <line class="connection-line animate-draw-line delay-3" x1="50%" y1="37.5%" x2="50%" y2="62.5%"/>
+                        <line class="connection-line animate-draw-line delay-3" x1="50%" y1="37.5%" x2="66.67%" y2="62.5%"/>
+                        <line class="connection-line animate-draw-line delay-3" x1="75%" y1="37.5%" x2="83.33%" y2="62.5%"/>
+                        <line class="connection-line animate-draw-line delay-3" x1="75%" y1="37.5%" x2="91.67%" y2="62.5%"/>
+                        
+                        <!-- Department Heads to Operational Staff -->
+                        <line class="connection-line animate-draw-line delay-4" x1="25%" y1="62.5%" x2="25%" y2="87.5%"/>
+                        <line class="connection-line animate-draw-line delay-4" x1="41.67%" y1="62.5%" x2="41.67%" y2="87.5%"/>
+                        <line class="connection-line animate-draw-line delay-4" x1="58.33%" y1="62.5%" x2="58.33%" y2="87.5%"/>
+                        <line class="connection-line animate-draw-line delay-4" x1="75%" y1="62.5%" x2="75%" y2="87.5%"/>
+                        <line class="connection-line animate-draw-line delay-4" x1="91.67%" y1="62.5%" x2="91.67%" y2="87.5%"/>
+                    </svg>
+
+                    <!-- Level 1: Deputy Minister -->
+                    <div class="level-1 org-box org-box-executive rounded-xl p-6 text-center text-white animate-fade-in-up delay-2" data-tooltip="معالي نائب الوزير - الإشراف العام على جميع عمليات الوزارة والقرارات الاستراتيجية">
+                        <div class="w-16 h-16 bg-accent rounded-full mx-auto mb-3 flex items-center justify-center">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7V9C15 10.1 14.1 11 13 11V22H11V16H9V22H7V11C5.9 11 5 10.1 5 9V7H3V9C3 11.2 4.8 13 7 13V22H17V13C19.2 13 21 11.2 21 9Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-headline text-lg font-bold mb-1">معالي نائب الوزير</h3>
+                        <p class="text-accent text-sm">Deputy Minister</p>
+                        <div class="text-xs text-white/80 mt-2">المكتب التنفيذي</div>
+                    </div>
+
+                    <!-- Level 2: Assistant Deputy Ministers -->
+                    <div class="level-2-1 org-box org-box-department rounded-xl p-4 text-center text-white animate-fade-in-up delay-3" data-tooltip="مساعد نائب الوزير للشؤون الأمنية - الإشراف على العمليات الأمنية والاستخبارات - 450 موظف">
+                        <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.4C14.8,12.8 13.4,14.4 12,14.4C10.6,14.4 9.2,12.8 9.2,11.4V10C9.2,8.6 10.6,7 12,7Z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-sm font-bold mb-1">مساعد نائب الوزير</h4>
+                        <p class="text-white/80 text-xs">للشؤون الأمنية</p>
+                        <div class="text-xs text-white/60 mt-1">Security Affairs</div>
+                    </div>
+
+                    <div class="level-2-2 org-box org-box-department rounded-xl p-4 text-center text-white animate-fade-in-up delay-3" data-tooltip="مساعد نائب الوزير للشؤون الإدارية - إدارة الموارد البشرية والعمليات الإدارية - 320 موظف">
+                        <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M16,4C16.88,4 17.67,4.5 18,5.26L19,7H20A2,2 0 0,1 22,9V19A2,2 0 0,1 20,21H4A2,2 0 0,1 2,19V9A2,2 0 0,1 4,7H5L6,5.26C6.33,4.5 7.12,4 8,4H16M8.5,9A1.5,1.5 0 0,0 7,10.5A1.5,1.5 0 0,0 8.5,12A1.5,1.5 0 0,0 10,10.5A1.5,1.5 0 0,0 8.5,9M15.5,9A1.5,1.5 0 0,0 14,10.5A1.5,1.5 0 0,0 15.5,12A1.5,1.5 0 0,0 17,10.5A1.5,1.5 0 0,0 15.5,9Z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-sm font-bold mb-1">مساعد نائب الوزير</h4>
+                        <p class="text-white/80 text-xs">للشؤون الإدارية</p>
+                        <div class="text-xs text-white/60 mt-1">Administrative Affairs</div>
+                    </div>
+
+                    <div class="level-2-3 org-box org-box-department rounded-xl p-4 text-center text-white animate-fade-in-up delay-3" data-tooltip="مساعد نائب الوزير للشؤون القانونية - الاستشارات القانونية والتشريعات - 180 موظف">
+                        <div class="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-sm font-bold mb-1">مساعد نائب الوزير</h4>
+                        <p class="text-white/80 text-xs">للشؤون القانونية</p>
+                        <div class="text-xs text-white/60 mt-1">Legal Affairs</div>
+                    </div>
+
+                    <!-- Level 3: Department Heads -->
+                    <div class="level-3-1 org-box org-box-operational rounded-lg p-3 text-center text-white animate-fade-in-up delay-4" data-tooltip="إدارة المراسلات - معالجة وتوجيه جميع المراسلات الواردة والصادرة - 85 موظف">
+                        <div class="w-10 h-10 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
+                            </svg>
+                        </div>
+                        <h5 class="font-headline text-xs font-bold mb-1">إدارة المراسلات</h5>
+                        <div class="text-xs text-white/60">Correspondence Dept.</div>
+                    </div>
+
+                    <div class="level-3-2 org-box org-box-operational rounded-lg p-3 text-center text-white animate-fade-in-up delay-4" data-tooltip="إدارة الأرشيف - حفظ وتصنيف الوثائق والمراسلات - 45 موظف">
+                        <div class="w-10 h-10 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                            </svg>
+                        </div>
+                        <h5 class="font-headline text-xs font-bold mb-1">إدارة الأرشيف</h5>
+                        <div class="text-xs text-white/60">Archive Dept.</div>
+                    </div>
+
+                    <div class="level-3-3 org-box org-box-operational rounded-lg p-3 text-center text-white animate-fade-in-up delay-4" data-tooltip="إدارة تقنية المعلومات - الأنظمة الإلكترونية والدعم التقني - 65 موظف">
+                        <div class="w-10 h-10 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M4,6H20V16H4M20,18A2,2 0 0,0 22,16V6C22,4.89 21.1,4 20,4H4C2.89,4 2,4.89 2,6V16A2,2 0 0,0 4,18H0V20H24V18H20Z"/>
+                            </svg>
+                        </div>
+                        <h5 class="font-headline text-xs font-bold mb-1">إدارة تقنية المعلومات</h5>
+                        <div class="text-xs text-white/60">IT Department</div>
+                    </div>
+
+                    <div class="level-3-4 org-box org-box-operational rounded-lg p-3 text-center text-white animate-fade-in-up delay-4" data-tooltip="إدارة الموارد البشرية - شؤون الموظفين والتطوير المهني - 95 موظف">
+                        <div class="w-10 h-10 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M16,4C16.88,4 17.67,4.5 18,5.26L19,7H20A2,2 0 0,1 22,9V19A2,2 0 0,1 20,21H4A2,2 0 0,1 2,19V9A2,2 0 0,1 4,7H5L6,5.26C6.33,4.5 7.12,4 8,4H16Z"/>
+                            </svg>
+                        </div>
+                        <h5 class="font-headline text-xs font-bold mb-1">إدارة الموارد البشرية</h5>
+                        <div class="text-xs text-white/60">Human Resources</div>
+                    </div>
+
+                    <div class="level-3-5 org-box org-box-operational rounded-lg p-3 text-center text-white animate-fade-in-up delay-4" data-tooltip="إدارة الشؤون المالية - الميزانية والمحاسبة والمشتريات - 75 موظف">
+                        <div class="w-10 h-10 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M7,15H9C9,16.08 10.37,17 12,17C13.63,17 15,16.08 15,15C15,13.9 13.96,13.5 11.76,12.97C9.64,12.44 7,11.78 7,9C7,7.21 8.47,5.69 10.5,5.18V3H13.5V5.18C15.53,5.69 17,7.21 17,9H15C15,7.92 13.63,7 12,7C10.37,7 9,7.92 9,9C9,10.1 10.04,10.5 12.24,11.03C14.36,11.56 17,12.22 17,15C17,16.79 15.53,18.31 13.5,18.82V21H10.5V18.82C8.47,18.31 7,16.79 7,15Z"/>
+                            </svg>
+                        </div>
+                        <h5 class="font-headline text-xs font-bold mb-1">إدارة الشؤون المالية</h5>
+                        <div class="text-xs text-white/60">Financial Affairs</div>
+                    </div>
+
+                    <div class="level-3-6 org-box org-box-operational rounded-lg p-3 text-center text-white animate-fade-in-up delay-4" data-tooltip="إدارة العلاقات العامة - الإعلام والتواصل مع الجمهور - 35 موظف">
+                        <div class="w-10 h-10 bg-white/20 rounded-full mx-auto mb-2 flex items-center justify-center">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M12,2A3,3 0 0,1 15,5V11A3,3 0 0,1 12,14A3,3 0 0,1 9,11V5A3,3 0 0,1 12,2M19,11C19,14.53 16.39,17.44 13,17.93V21H11V17.93C7.61,17.44 5,14.53 5,11H7A5,5 0 0,0 12,16A5,5 0 0,0 17,11H19Z"/>
+                            </svg>
+                        </div>
+                        <h5 class="font-headline text-xs font-bold mb-1">إدارة العلاقات العامة</h5>
+                        <div class="text-xs text-white/60">Public Relations</div>
+                    </div>
+
+                    <!-- Level 4: Operational Staff -->
+                    <div class="level-4-1 org-box org-box-operational rounded-lg p-2 text-center text-white animate-fade-in-up delay-5" data-tooltip="قسم الاستقبال - استلام وتسجيل المراسلات الواردة - 25 موظف">
+                        <div class="w-8 h-8 bg-white/20 rounded-full mx-auto mb-1 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19Z"/>
+                            </svg>
+                        </div>
+                        <h6 class="font-headline text-xs font-bold">قسم الاستقبال</h6>
+                        <div class="text-xs text-white/60">Reception</div>
+                    </div>
+
+                    <div class="level-4-2 org-box org-box-operational rounded-lg p-2 text-center text-white animate-fade-in-up delay-5" data-tooltip="قسم التصنيف - تصنيف وفهرسة الوثائق - 20 موظف">
+                        <div class="w-8 h-8 bg-white/20 rounded-full mx-auto mb-1 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M3,3V21H21V3H3M19,19H5V5H19V19M7,7V9H17V7H7M7,11V13H17V11H7M7,15V17H17V15H7Z"/>
+                            </svg>
+                        </div>
+                        <h6 class="font-headline text-xs font-bold">قسم التصنيف</h6>
+                        <div class="text-xs text-white/60">Classification</div>
+                    </div>
+
+                    <div class="level-4-3 org-box org-box-operational rounded-lg p-2 text-center text-white animate-fade-in-up delay-5" data-tooltip="قسم الدعم التقني - صيانة الأنظمة والدعم الفني - 30 موظف">
+                        <div class="w-8 h-8 bg-white/20 rounded-full mx-auto mb-1 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.6,4.7C0.4,7.1 0.9,10.1 2.9,12.1C4.8,14 7.5,14.5 9.8,13.6L18.9,22.7C19.3,23.1 19.9,23.1 20.3,22.7L22.6,20.4C23.1,20 23.1,19.3 22.7,19Z"/>
+                            </svg>
+                        </div>
+                        <h6 class="font-headline text-xs font-bold">قسم الدعم التقني</h6>
+                        <div class="text-xs text-white/60">Tech Support</div>
+                    </div>
+
+                    <div class="level-4-4 org-box org-box-operational rounded-lg p-2 text-center text-white animate-fade-in-up delay-5" data-tooltip="قسم التدريب - برامج التطوير المهني - 15 موظف">
+                        <div class="w-8 h-8 bg-white/20 rounded-full mx-auto mb-1 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"/>
+                            </svg>
+                        </div>
+                        <h6 class="font-headline text-xs font-bold">قسم التدريب</h6>
+                        <div class="text-xs text-white/60">Training</div>
+                    </div>
+
+                    <div class="level-4-5 org-box org-box-operational rounded-lg p-2 text-center text-white animate-fade-in-up delay-5" data-tooltip="قسم الإعلام - النشر والتواصل الإعلامي - 18 موظف">
+                        <div class="w-8 h-8 bg-white/20 rounded-full mx-auto mb-1 flex items-center justify-center">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                <path d="M20,5H4V19L13.5,9.5V19H20V5Z"/>
+                            </svg>
+                        </div>
+                        <h6 class="font-headline text-xs font-bold">قسم الإعلام</h6>
+                        <div class="text-xs text-white/60">Media</div>
+                    </div>
+                </div>
+
+                <!-- Chart Legend -->
+                <div class="flex justify-center mt-8 animate-fade-in-up delay-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 flex gap-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded org-box-executive"></div>
+                            <span class="text-white text-sm">المستوى التنفيذي</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded org-box-department"></div>
+                            <span class="text-white text-sm">رؤساء الإدارات</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-4 h-4 rounded org-box-operational"></div>
+                            <span class="text-white text-sm">الموظفون التشغيليون</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Navigation Controls -->
+        <nav class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in delay-5">
+            <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-full px-6 py-4">
+                <!-- Previous Button -->
+                <a href="title_slide_ministry_introduction.html" class="nav-button bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </a>
+                
+                <!-- Slide Counter -->
+                <div class="text-white text-sm font-medium px-4">
+                    2 من 6
+                </div>
+                
+                <!-- Next Button -->
+                <a href="process_overview_mail_workflow_summary.html" class="nav-button bg-accent hover:bg-accent-600 text-primary px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Progress Indicator -->
+        <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+            <div class="progress-bar h-full bg-accent transition-all duration-300"></div>
+        </div>
+
+        <!-- Quick Navigation Menu -->
+        <div class="absolute top-8 left-8 animate-fade-in delay-1">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div class="text-white text-sm font-semibold mb-3">الانتقال السريع</div>
+                <div class="space-y-2">
+                    <a href="title_slide_ministry_introduction.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • المقدمة
+                    </a>
+                    <a href="organizational_chart_ministry_hierarchy.html" class="block text-accent text-sm hover:text-accent-400 transition-colors">
+                        • الهيكل التنظيمي
+                    </a>
+                    <a href="process_overview_mail_workflow_summary.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • نظرة عامة على العمليات
+                    </a>
+                    <a href="mail_reception_stage_intake_process_detail.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة استقبال المراسلات
+                    </a>
+                    <a href="deputy_review_stage_executive_approval_process.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة مراجعة نائب الوزير
+                    </a>
+                    <a href="document_processing_stage_administrative_workflow.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة معالجة الوثائق
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard Navigation Hint -->
+        <div class="absolute bottom-20 right-8 animate-fade-in delay-5">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-white/60 text-sm">
+                <div class="flex items-center gap-2 mb-1">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">←</kbd>
+                    <span>السابق</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">→</kbd>
+                    <span>التالي</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tooltip Element -->
+        <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.getElementById('tooltip');
+            const orgBoxes = document.querySelectorAll('.org-box');
+
+            // Tooltip functionality
+            orgBoxes.forEach(box => {
+                box.addEventListener('mouseenter', function(e) {
+                    const tooltipText = this.getAttribute('data-tooltip');
+                    if (tooltipText) {
+                        tooltip.textContent = tooltipText;
+                        tooltip.classList.add('show');
+                        updateTooltipPosition(e);
+                    }
+                });
+
+                box.addEventListener('mousemove', updateTooltipPosition);
+
+                box.addEventListener('mouseleave', function() {
+                    tooltip.classList.remove('show');
+                });
+            });
+
+            function updateTooltipPosition(e) {
+                const rect = tooltip.getBoundingClientRect();
+                let x = e.clientX + 10;
+                let y = e.clientY - rect.height - 10;
+
+                // Adjust if tooltip goes off screen
+                if (x + rect.width > window.innerWidth) {
+                    x = e.clientX - rect.width - 10;
+                }
+                if (y < 0) {
+                    y = e.clientY + 10;
+                }
+
+                tooltip.style.left = x + 'px';
+                tooltip.style.top = y + 'px';
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        window.location.href = 'title_slide_ministry_introduction.html';
+                        break;
+                    case 'ArrowRight':
+                    case ' ':
+                        window.location.href = 'process_overview_mail_workflow_summary.html';
+                        break;
+                    case 'Home':
+                        window.location.href = 'title_slide_ministry_introduction.html';
+                        break;
+                }
+            });
+
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

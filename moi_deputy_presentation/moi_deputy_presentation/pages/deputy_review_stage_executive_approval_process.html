@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مرحلة مراجعة نائب الوزير - عملية الموافقة التنفيذية</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+        .delay-4 { animation-delay: 1.2s; }
+        .delay-5 { animation-delay: 1.5s; }
+        .delay-6 { animation-delay: 1.8s; }
+        
+        .geometric-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
+            background-size: 200px 200px, 300px 300px, 60px 60px, 60px 60px;
+        }
+        
+        .slide-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1B365D 0%, #243B53 50%, #334E68 100%);
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
+        }
+        
+        .progress-bar {
+            width: 77.77%; /* 5 of 6 slides */
+            transition: width 0.3s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(27, 54, 93, 0.3);
+        }
+        
+        .priority-urgent {
+            background: linear-gradient(135deg, #DC2626, #EF4444);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+        
+        .priority-standard {
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+        }
+        
+        .priority-routine {
+            background: linear-gradient(135deg, #059669, #10B981);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+        
+        .workflow-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .workflow-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(27, 54, 93, 0.2);
+        }
+        
+        .decision-tree-line {
+            position: relative;
+        }
+        
+        .decision-tree-line::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 30px;
+            height: 2px;
+            background: rgba(212, 175, 55, 0.6);
+            transform: translateY(-50%);
+        }
+        
+        .metrics-counter {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #D4AF37, #CA8A04);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .signature-pad {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+    </style>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmoideputy9736back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="font-body">
+    <!-- Main Slide Container -->
+    <div class="slide-container geometric-pattern relative overflow-hidden">
+        <!-- Header with Ministry Logo -->
+        <header class="absolute top-8 right-8 z-10">
+            <div class="flex items-center gap-4 animate-fade-in">
+                <!-- Ministry of Interior Logo -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 logo-glow">
+                    <svg width="80" height="80" viewBox="0 0 100 100" class="text-accent">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#CA8A04;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Shield Shape -->
+                        <path d="M50 10 L20 25 L20 60 Q20 80 50 90 Q80 80 80 60 L80 25 Z" fill="url(#logoGradient)" stroke="#1B365D" stroke-width="2"/>
+                        <!-- Interior Symbol -->
+                        <circle cx="50" cy="40" r="12" fill="#1B365D"/>
+                        <rect x="45" y="55" width="10" height="20" fill="#1B365D" rx="2"/>
+                        <!-- Arabic Text Placeholder -->
+                        <text x="50" y="85" text-anchor="middle" fill="#1B365D" font-size="8" font-weight="bold">MOI</text>
+                    </svg>
+                </div>
+                <!-- Kuwait National Emblem -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                    <svg width="60" height="60" viewBox="0 0 100 100" class="text-accent">
+                        <!-- Kuwait Emblem Simplified -->
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                        <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="url(#logoGradient)"/>
+                        <circle cx="50" cy="50" r="8" fill="#1B365D"/>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex items-center justify-center min-h-screen px-8 py-16">
+            <div class="max-w-7xl mx-auto w-full">
+                <!-- Slide Title -->
+                <div class="text-center mb-12 animate-fade-in-up">
+                    <h1 class="font-headline text-5xl md:text-6xl font-bold text-white mb-4">
+                        مرحلة مراجعة نائب الوزير
+                    </h1>
+                    <div class="text-accent text-2xl md:text-3xl font-semibold mb-2">
+                        عملية الموافقة التنفيذية
+                    </div>
+                    <div class="text-white/80 text-lg" dir="ltr">
+                        Deputy Review Stage - Executive Approval Process
+                    </div>
+                </div>
+
+                <!-- Main Workflow Layout -->
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <!-- Priority Classification System -->
+                    <div class="lg:col-span-1 animate-slide-in-right delay-1">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
+                            <h3 class="text-white text-xl font-bold mb-6 text-center">
+                                نظام تصنيف الأولويات
+                            </h3>
+                            
+                            <!-- Urgent Priority -->
+                            <div class="priority-urgent rounded-xl p-4 mb-4 text-white">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-4 h-4 bg-white rounded-full"></div>
+                                    <span class="font-bold">عاجل جداً</span>
+                                </div>
+                                <div class="text-sm opacity-90">
+                                    معالجة فورية - خلال ساعة واحدة
+                                </div>
+                                <div class="text-xs mt-2 opacity-80">
+                                    الأمن القومي، الطوارئ، القرارات الحرجة
+                                </div>
+                            </div>
+
+                            <!-- Standard Priority -->
+                            <div class="priority-standard rounded-xl p-4 mb-4 text-white">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-4 h-4 bg-white rounded-full"></div>
+                                    <span class="font-bold">مراجعة عادية</span>
+                                </div>
+                                <div class="text-sm opacity-90">
+                                    معالجة خلال 24 ساعة
+                                </div>
+                                <div class="text-xs mt-2 opacity-80">
+                                    المراسلات الرسمية، التقارير الدورية
+                                </div>
+                            </div>
+
+                            <!-- Routine Priority -->
+                            <div class="priority-routine rounded-xl p-4 text-white">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <div class="w-4 h-4 bg-white rounded-full"></div>
+                                    <span class="font-bold">روتيني</span>
+                                </div>
+                                <div class="text-sm opacity-90">
+                                    معالجة خلال 3-5 أيام عمل
+                                </div>
+                                <div class="text-xs mt-2 opacity-80">
+                                    الإشعارات، المراسلات الإدارية
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Time-Based Metrics -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <h4 class="text-white text-lg font-bold mb-4 text-center">
+                                مؤشرات الأداء
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="text-center">
+                                    <div class="metrics-counter">98.5%</div>
+                                    <div class="text-white/80 text-sm">معدل الموافقة</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="metrics-counter">2.3</div>
+                                    <div class="text-white/80 text-sm">متوسط أيام المراجعة</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="metrics-counter">847</div>
+                                    <div class="text-white/80 text-sm">وثيقة هذا الشهر</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Decision Tree Workflow -->
+                    <div class="lg:col-span-2 animate-fade-in-up delay-2">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                            <h3 class="text-white text-xl font-bold mb-6 text-center">
+                                مسار اتخاذ القرار التنفيذي
+                            </h3>
+
+                            <!-- Workflow Steps -->
+                            <div class="space-y-6">
+                                <!-- Document Reception -->
+                                <div class="flex items-center gap-4">
+                                    <div class="workflow-card bg-accent/20 border border-accent/30 rounded-xl p-4 flex-1 decision-tree-line">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-semibold">استلام الوثيقة</div>
+                                                <div class="text-white/70 text-sm">فحص أولي وتصنيف</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Priority Assessment -->
+                                    <div class="workflow-card bg-white/10 border border-white/20 rounded-xl p-4 flex-1 decision-tree-line">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11M11,9H13V7H11"/>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-semibold">تقييم الأولوية</div>
+                                                <div class="text-white/70 text-sm">تحديد مستوى الأهمية</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Review Process -->
+                                <div class="flex items-center gap-4">
+                                    <div class="workflow-card bg-primary/30 border border-primary/50 rounded-xl p-4 flex-1 decision-tree-line">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                                                    <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M10,17L5,12L6.41,10.59L10,14.17L17.59,6.58L19,8L10,17Z"/>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-semibold">مراجعة نائب الوزير</div>
+                                                <div class="text-white/70 text-sm">دراسة وتحليل المحتوى</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Decision Making -->
+                                    <div class="workflow-card bg-accent/20 border border-accent/30 rounded-xl p-4 flex-1">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                                    <path d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"/>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-white font-semibold">اتخاذ القرار</div>
+                                                <div class="text-white/70 text-sm">موافقة أو رفض أو تعديل</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Digital Signature Integration -->
+                            <div class="mt-8 signature-pad rounded-xl p-6">
+                                <h4 class="text-white text-lg font-bold mb-4 text-center">
+                                    نظام التوقيع الرقمي المتكامل
+                                </h4>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-accent">
+                                                <path d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="text-white font-semibold mb-2">التوقيع الإلكتروني</div>
+                                        <div class="text-white/70 text-sm">آمن ومعتمد قانونياً</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-secondary">
+                                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                            </svg>
+                                        </div>
+                                        <div class="text-white font-semibold mb-2">التوقيع التقليدي</div>
+                                        <div class="text-white/70 text-sm">للوثائق الحساسة</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Categories Examples -->
+                <div class="animate-fade-in-up delay-3">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                        <h3 class="text-white text-xl font-bold mb-6 text-center">
+                            أمثلة على فئات المراسلات المعالجة
+                        </h3>
+                        <div class="grid md:grid-cols-4 gap-4">
+                            <div class="workflow-card bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-red-400">
+                                        <path d="M12,2L13.09,8.26L22,9L13.09,9.74L12,16L10.91,9.74L2,9L10.91,8.26L12,2Z"/>
+                                    </svg>
+                                </div>
+                                <div class="text-white font-semibold text-sm mb-1">الأمن القومي</div>
+                                <div class="text-white/70 text-xs">تقارير أمنية عاجلة</div>
+                            </div>
+                            
+                            <div class="workflow-card bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                                <div class="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-blue-400">
+                                        <path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19Z"/>
+                                    </svg>
+                                </div>
+                                <div class="text-white font-semibold text-sm mb-1">المراسلات الرسمية</div>
+                                <div class="text-white/70 text-xs">خطابات حكومية</div>
+                            </div>
+                            
+                            <div class="workflow-card bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                                <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-green-400">
+                                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                    </svg>
+                                </div>
+                                <div class="text-white font-semibold text-sm mb-1">التقارير الدورية</div>
+                                <div class="text-white/70 text-xs">تقارير شهرية وسنوية</div>
+                            </div>
+                            
+                            <div class="workflow-card bg-white/5 border border-white/10 rounded-xl p-4 text-center">
+                                <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-yellow-400">
+                                        <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11M11,9H13V7H11"/>
+                                    </svg>
+                                </div>
+                                <div class="text-white font-semibold text-sm mb-1">الإشعارات الإدارية</div>
+                                <div class="text-white/70 text-xs">تعاميم وقرارات</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Professional Photography Section -->
+                <div class="mt-8 animate-fade-in-up delay-4">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                        <h3 class="text-white text-xl font-bold mb-6 text-center">
+                            العملية الفعلية في مكاتب الوزارة
+                        </h3>
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="relative overflow-hidden rounded-xl">
+                                <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Deputy Minister reviewing documents" class="w-full h-48 object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute bottom-4 right-4 text-white">
+                                    <div class="font-semibold text-sm">مراجعة الوثائق</div>
+                                    <div class="text-xs opacity-80">مكتب نائب الوزير</div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative overflow-hidden rounded-xl">
+                                <img src="https://images.pixabay.com/photo/2016/11/29/06/15/office-1867383_960_720.jpg" alt="Document preparation process" class="w-full h-48 object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute bottom-4 right-4 text-white">
+                                    <div class="font-semibold text-sm">إعداد الوثائق</div>
+                                    <div class="text-xs opacity-80">قسم المراسلات</div>
+                                </div>
+                            </div>
+                            
+                            <div class="relative overflow-hidden rounded-xl">
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Digital signature process" class="w-full h-48 object-cover" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                <div class="absolute bottom-4 right-4 text-white">
+                                    <div class="font-semibold text-sm">التوقيع الرقمي</div>
+                                    <div class="text-xs opacity-80">النظام الإلكتروني</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Navigation Controls -->
+        <nav class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in delay-5">
+            <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-full px-6 py-4">
+                <!-- Previous Button -->
+                <a href="mail_reception_stage_intake_process_detail.html" class="nav-button bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </a>
+                
+                <!-- Slide Counter -->
+                <div class="text-white text-sm font-medium px-4">
+                    5 من 6
+                </div>
+                
+                <!-- Next Button -->
+                <a href="document_processing_stage_administrative_workflow.html" class="nav-button bg-accent hover:bg-accent-600 text-primary px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Progress Indicator -->
+        <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+            <div class="progress-bar h-full bg-accent transition-all duration-300"></div>
+        </div>
+
+        <!-- Quick Navigation Menu -->
+        <div class="absolute top-8 left-8 animate-fade-in delay-1">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div class="text-white text-sm font-semibold mb-3">الانتقال السريع</div>
+                <div class="space-y-2">
+                    <a href="title_slide_ministry_introduction.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • المقدمة
+                    </a>
+                    <a href="organizational_chart_ministry_hierarchy.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • الهيكل التنظيمي
+                    </a>
+                    <a href="process_overview_mail_workflow_summary.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • نظرة عامة على العمليات
+                    </a>
+                    <a href="mail_reception_stage_intake_process_detail.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة استقبال المراسلات
+                    </a>
+                    <a href="deputy_review_stage_executive_approval_process.html" class="block text-accent text-sm hover:text-accent-400 transition-colors">
+                        • مرحلة مراجعة نائب الوزير
+                    </a>
+                    <a href="document_processing_stage_administrative_workflow.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة معالجة الوثائق
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard Navigation Hint -->
+        <div class="absolute bottom-20 right-8 animate-fade-in delay-5">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-white/60 text-sm">
+                <div class="flex items-center gap-2 mb-1">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">←</kbd>
+                    <span>السابق</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">→</kbd>
+                    <span>التالي</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Keyboard Navigation and Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        window.location.href = 'mail_reception_stage_intake_process_detail.html';
+                        break;
+                    case 'ArrowRight':
+                    case ' ':
+                        window.location.href = 'document_processing_stage_administrative_workflow.html';
+                        break;
+                    case 'Home':
+                        window.location.href = 'title_slide_ministry_introduction.html';
+                        break;
+                }
+            });
+
+            // Interactive workflow cards
+            const workflowCards = document.querySelectorAll('.workflow-card');
+            workflowCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Add click animation
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+
+            // Priority classification hover effects
+            const priorityCards = document.querySelectorAll('.priority-urgent, .priority-standard, .priority-routine');
+            priorityCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

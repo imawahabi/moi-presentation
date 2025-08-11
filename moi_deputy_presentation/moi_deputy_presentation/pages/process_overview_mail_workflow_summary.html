@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظرة عامة على العمليات - نظام إدارة المراسلات</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes flowAnimation {
+            0% { transform: translateX(0); opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { transform: translateX(20px); opacity: 0.3; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-pulse-gentle {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .flow-arrow {
+            animation: flowAnimation 2s ease-in-out infinite;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1.0s; }
+        .delay-6 { animation-delay: 1.2s; }
+        .delay-7 { animation-delay: 1.4s; }
+        
+        .geometric-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
+            background-size: 200px 200px, 300px 300px, 60px 60px, 60px 60px;
+        }
+        
+        .slide-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1B365D 0%, #243B53 50%, #334E68 100%);
+        }
+        
+        .stage-box {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .stage-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.2);
+        }
+        
+        .stage-box.active {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.3);
+            border-color: #D4AF37;
+        }
+        
+        .progress-bar {
+            width: 50%; /* 3 of 6 slides */
+            transition: width 0.3s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(27, 54, 93, 0.3);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .workflow-timeline {
+            position: relative;
+        }
+        
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #D4AF37 0%, rgba(212, 175, 55, 0.3) 100%);
+            z-index: 1;
+        }
+        
+        .stage-connector {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmoideputy9736back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="font-body">
+    <!-- Main Slide Container -->
+    <div class="slide-container geometric-pattern relative overflow-hidden">
+        <!-- Header with Ministry Logo -->
+        <header class="absolute top-8 right-8 z-10">
+            <div class="flex items-center gap-4 animate-fade-in">
+                <!-- Ministry of Interior Logo -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                    <svg width="80" height="80" viewBox="0 0 100 100" class="text-accent">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#CA8A04;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Shield Shape -->
+                        <path d="M50 10 L20 25 L20 60 Q20 80 50 90 Q80 80 80 60 L80 25 Z" fill="url(#logoGradient)" stroke="#1B365D" stroke-width="2"/>
+                        <!-- Interior Symbol -->
+                        <circle cx="50" cy="40" r="12" fill="#1B365D"/>
+                        <rect x="45" y="55" width="10" height="20" fill="#1B365D" rx="2"/>
+                        <!-- Arabic Text Placeholder -->
+                        <text x="50" y="85" text-anchor="middle" fill="#1B365D" font-size="8" font-weight="bold">MOI</text>
+                    </svg>
+                </div>
+                <!-- Kuwait National Emblem -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                    <svg width="60" height="60" viewBox="0 0 100 100" class="text-accent">
+                        <!-- Kuwait Emblem Simplified -->
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                        <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="url(#logoGradient)"/>
+                        <circle cx="50" cy="50" r="8" fill="#1B365D"/>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex items-center justify-center min-h-screen px-8 py-16">
+            <div class="max-w-7xl mx-auto w-full">
+                <!-- Page Title -->
+                <div class="text-center mb-12 animate-fade-in-up">
+                    <h1 class="font-headline text-5xl md:text-6xl font-bold text-white mb-4">
+                        نظرة عامة على العمليات
+                    </h1>
+                    <div class="text-accent text-xl md:text-2xl font-semibold">
+                        سير عمل معالجة المراسلات الشامل
+                    </div>
+                </div>
+
+                <!-- Main Workflow Container -->
+                <div class="grid lg:grid-cols-4 gap-8">
+                    <!-- Workflow Timeline (Main Content) -->
+                    <div class="lg:col-span-3">
+                        <div class="workflow-timeline relative">
+                            <!-- Stage 1: Mail Reception -->
+                            <div class="stage-box bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in-up delay-1" data-stage="reception">
+                                <div class="flex items-center gap-6">
+                                    <div class="bg-accent rounded-full p-4 animate-pulse-gentle">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-2xl font-bold text-white mb-2">استقبال البريد</h3>
+                                        <p class="text-white/80 mb-3">استلام وتسجيل المراسلات الواردة</p>
+                                        <div class="flex items-center gap-4 text-sm">
+                                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full">متوسط الوقت: 15 دقيقة</span>
+                                            <span class="text-white/60">يومياً: 150+ مراسلة</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-3xl font-bold text-accent">01</div>
+                                        <div class="text-white/60 text-sm">المرحلة</div>
+                                    </div>
+                                </div>
+                                <!-- Flow Arrow -->
+                                <div class="flex justify-center mt-4">
+                                    <svg width="30" height="20" viewBox="0 0 30 20" class="text-accent flow-arrow">
+                                        <path d="M5 10 L25 10 M20 5 L25 10 L20 15" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Stage 2: Deputy Review -->
+                            <div class="stage-box bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in-up delay-2" data-stage="deputy">
+                                <div class="flex items-center gap-6">
+                                    <div class="bg-accent rounded-full p-4">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8H11C9.9 8 9 7.1 9 6V4L3 7V9H21ZM12 17.5L7.5 20L9 14.5L4.5 10.5L10 10L12 4.5L14 10L19.5 10.5L15 14.5L16.5 20L12 17.5Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-2xl font-bold text-white mb-2">مراجعة النائب</h3>
+                                        <p class="text-white/80 mb-3">مراجعة وموافقة نائب الوزير</p>
+                                        <div class="flex items-center gap-4 text-sm">
+                                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full">متوسط الوقت: 45 دقيقة</span>
+                                            <span class="text-white/60">معدل الموافقة: 92%</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-3xl font-bold text-accent">02</div>
+                                        <div class="text-white/60 text-sm">المرحلة</div>
+                                    </div>
+                                </div>
+                                <!-- Flow Arrow -->
+                                <div class="flex justify-center mt-4">
+                                    <svg width="30" height="20" viewBox="0 0 30 20" class="text-accent flow-arrow">
+                                        <path d="M5 10 L25 10 M20 5 L25 10 L20 15" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Stage 3: Document Processing -->
+                            <div class="stage-box bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in-up delay-3" data-stage="processing">
+                                <div class="flex items-center gap-6">
+                                    <div class="bg-accent rounded-full p-4">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-2xl font-bold text-white mb-2">معالجة الوثائق</h3>
+                                        <p class="text-white/80 mb-3">تحضير وتجهيز المراسلات</p>
+                                        <div class="flex items-center gap-4 text-sm">
+                                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full">متوسط الوقت: 30 دقيقة</span>
+                                            <span class="text-white/60">معدل الدقة: 98%</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-3xl font-bold text-accent">03</div>
+                                        <div class="text-white/60 text-sm">المرحلة</div>
+                                    </div>
+                                </div>
+                                <!-- Flow Arrow -->
+                                <div class="flex justify-center mt-4">
+                                    <svg width="30" height="20" viewBox="0 0 30 20" class="text-accent flow-arrow">
+                                        <path d="M5 10 L25 10 M20 5 L25 10 L20 15" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Stage 4: Outgoing Mail -->
+                            <div class="stage-box bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-8 border border-white/20 animate-fade-in-up delay-4" data-stage="outgoing">
+                                <div class="flex items-center gap-6">
+                                    <div class="bg-accent rounded-full p-4">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                            <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-2xl font-bold text-white mb-2">البريد الصادر</h3>
+                                        <p class="text-white/80 mb-3">إرسال المراسلات المعتمدة</p>
+                                        <div class="flex items-center gap-4 text-sm">
+                                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full">متوسط الوقت: 20 دقيقة</span>
+                                            <span class="text-white/60">إلكتروني: 75%</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-3xl font-bold text-accent">04</div>
+                                        <div class="text-white/60 text-sm">المرحلة</div>
+                                    </div>
+                                </div>
+                                <!-- Flow Arrow -->
+                                <div class="flex justify-center mt-4">
+                                    <svg width="30" height="20" viewBox="0 0 30 20" class="text-accent flow-arrow">
+                                        <path d="M5 10 L25 10 M20 5 L25 10 L20 15" stroke="currentColor" stroke-width="2" fill="none"/>
+                                    </svg>
+                                </div>
+                            </div>
+
+                            <!-- Stage 5: Archival -->
+                            <div class="stage-box bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 animate-fade-in-up delay-5" data-stage="archival">
+                                <div class="flex items-center gap-6">
+                                    <div class="bg-accent rounded-full p-4">
+                                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                                            <path d="M3,3H21V7H3V3M4,8H20V21H4V8M9.5,11A0.5,0.5 0 0,0 9,11.5V13H15V11.5A0.5,0.5 0 0,0 14.5,11H9.5Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="text-2xl font-bold text-white mb-2">الأرشفة</h3>
+                                        <p class="text-white/80 mb-3">حفظ وتصنيف المراسلات</p>
+                                        <div class="flex items-center gap-4 text-sm">
+                                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full">متوسط الوقت: 10 دقائق</span>
+                                            <span class="text-white/60">رقمي: 85%</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-3xl font-bold text-accent">05</div>
+                                        <div class="text-white/60 text-sm">المرحلة</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Legend and Metrics -->
+                    <div class="lg:col-span-1">
+                        <div class="space-y-6 animate-slide-in-right delay-6">
+                            <!-- Performance Metrics -->
+                            <div class="metric-card rounded-2xl p-6">
+                                <h3 class="text-xl font-bold text-white mb-4">مؤشرات الأداء الرئيسية</h3>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-white/80">الحجم اليومي</span>
+                                        <span class="text-accent font-bold">450+ مراسلة</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-white/80">كفاءة المعالجة</span>
+                                        <span class="text-accent font-bold">94%</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-white/80">متوسط وقت الإنجاز</span>
+                                        <span class="text-accent font-bold">2.5 ساعة</span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-white/80">معدل الرضا</span>
+                                        <span class="text-accent font-bold">96%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Color Legend -->
+                            <div class="metric-card rounded-2xl p-6">
+                                <h3 class="text-xl font-bold text-white mb-4">دليل الألوان</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-4 h-4 bg-accent rounded-full"></div>
+                                        <span class="text-white/80 text-sm">المرحلة النشطة</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-4 h-4 bg-white/20 rounded-full"></div>
+                                        <span class="text-white/80 text-sm">المرحلة المكتملة</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-4 h-4 bg-white/10 rounded-full border border-white/30"></div>
+                                        <span class="text-white/80 text-sm">المرحلة القادمة</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="metric-card rounded-2xl p-6">
+                                <h3 class="text-xl font-bold text-white mb-4">إجراءات سريعة</h3>
+                                <div class="space-y-3">
+                                    <a href="mail_reception_stage_intake_process_detail.html" class="block bg-white/10 hover:bg-white/20 rounded-lg p-3 text-white text-sm transition-all duration-200">
+                                        عرض تفاصيل الاستقبال
+                                    </a>
+                                    <a href="deputy_review_stage_executive_approval_process.html" class="block bg-white/10 hover:bg-white/20 rounded-lg p-3 text-white text-sm transition-all duration-200">
+                                        مراجعة النائب
+                                    </a>
+                                    <a href="document_processing_stage_administrative_workflow.html" class="block bg-white/10 hover:bg-white/20 rounded-lg p-3 text-white text-sm transition-all duration-200">
+                                        معالجة الوثائق
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- System Status -->
+                            <div class="metric-card rounded-2xl p-6">
+                                <h3 class="text-xl font-bold text-white mb-4">حالة النظام</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white/80 text-sm">النظام الإلكتروني</span>
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                            <span class="text-green-400 text-sm">نشط</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white/80 text-sm">قاعدة البيانات</span>
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                            <span class="text-green-400 text-sm">متصلة</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white/80 text-sm">آخر تحديث</span>
+                                        <span class="text-white/60 text-sm">11/08/2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Navigation Controls -->
+        <nav class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in delay-7">
+            <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-full px-6 py-4">
+                <!-- Previous Button -->
+                <a href="organizational_chart_ministry_hierarchy.html" class="nav-button bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </a>
+                
+                <!-- Slide Counter -->
+                <div class="text-white text-sm font-medium px-4">
+                    3 من 6
+                </div>
+                
+                <!-- Next Button -->
+                <a href="mail_reception_stage_intake_process_detail.html" class="nav-button bg-accent hover:bg-accent-600 text-primary px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Progress Indicator -->
+        <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+            <div class="progress-bar h-full bg-accent transition-all duration-300"></div>
+        </div>
+
+        <!-- Quick Navigation Menu -->
+        <div class="absolute top-8 left-8 animate-fade-in delay-1">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div class="text-white text-sm font-semibold mb-3">الانتقال السريع</div>
+                <div class="space-y-2">
+                    <a href="title_slide_ministry_introduction.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • المقدمة
+                    </a>
+                    <a href="organizational_chart_ministry_hierarchy.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • الهيكل التنظيمي
+                    </a>
+                    <a href="process_overview_mail_workflow_summary.html" class="block text-accent text-sm hover:text-accent-400 transition-colors">
+                        • نظرة عامة على العمليات
+                    </a>
+                    <a href="mail_reception_stage_intake_process_detail.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة استقبال المراسلات
+                    </a>
+                    <a href="deputy_review_stage_executive_approval_process.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة مراجعة نائب الوزير
+                    </a>
+                    <a href="document_processing_stage_administrative_workflow.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة معالجة الوثائق
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard Navigation Hint -->
+        <div class="absolute bottom-20 right-8 animate-fade-in delay-7">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-white/60 text-sm">
+                <div class="flex items-center gap-2 mb-1">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">←</kbd>
+                    <span>السابق</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">→</kbd>
+                    <span>التالي</span>
+                </div>
+                <div class="flex items-center gap-2 mt-1">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">Click</kbd>
+                    <span>تفاصيل المرحلة</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactive Features -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stage box interactions
+            const stageBoxes = document.querySelectorAll('.stage-box');
+            
+            stageBoxes.forEach(box => {
+                box.addEventListener('click', function() {
+                    // Remove active class from all boxes
+                    stageBoxes.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked box
+                    this.classList.add('active');
+                    
+                    // Navigate to detailed stage page based on data-stage attribute
+                    const stage = this.getAttribute('data-stage');
+                    switch(stage) {
+                        case 'reception':
+                            window.location.href = 'mail_reception_stage_intake_process_detail.html';
+                            break;
+                        case 'deputy':
+                            window.location.href = 'deputy_review_stage_executive_approval_process.html';
+                            break;
+                        case 'processing':
+                            window.location.href = 'document_processing_stage_administrative_workflow.html';
+                            break;
+                        default:
+                            break;
+                    }
+                });
+                
+                // Hover effects
+                box.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                box.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        window.location.href = 'organizational_chart_ministry_hierarchy.html';
+                        break;
+                    case 'ArrowRight':
+                    case ' ':
+                        window.location.href = 'mail_reception_stage_intake_process_detail.html';
+                        break;
+                    case 'Home':
+                        window.location.href = 'title_slide_ministry_introduction.html';
+                        break;
+                    case '1':
+                        window.location.href = 'mail_reception_stage_intake_process_detail.html';
+                        break;
+                    case '2':
+                        window.location.href = 'deputy_review_stage_executive_approval_process.html';
+                        break;
+                    case '3':
+                        window.location.href = 'document_processing_stage_administrative_workflow.html';
+                        break;
+                }
+            });
+
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Animate metrics on load
+            setTimeout(() => {
+                const metrics = document.querySelectorAll('.metric-card');
+                metrics.forEach((metric, index) => {
+                    setTimeout(() => {
+                        metric.style.transform = 'translateX(0)';
+                        metric.style.opacity = '1';
+                    }, index * 200);
+                });
+            }, 1000);
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

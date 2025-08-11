@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض تقديمي - الإدارة العامة لمكتب وكيل الوزارة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 RTL CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <!-- Tailwind (Play CDN) with prefix to avoid conflicts and preflight disabled -->
+    <script>
+      window.tailwind = window.tailwind || {};
+      tailwind.config = {
+        prefix: 'tw-',
+        corePlugins: { preflight: false }
+      }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+            direction: rtl;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('GtbGrDKX0AAJPtx.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(3px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            display: none;
+            width: 92%;
+            max-width: 1300px;
+            height: 85vh;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #eef2f7 100%);
+            border: 2px solid rgba(30, 60, 114, 0.12);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 8px 25px rgba(30, 60, 114, 0.1);
+            padding: 0;
+            position: relative;
+            animation: slideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72, #2a5298, #3b82f6);
+            z-index: 1;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3b82f6 100%);
+            color: white;
+            padding: 40px 50px;
+            margin: -2px -2px 0 -2px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(30, 60, 114, 0.3);
+        }
+
+        .slide-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 6px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+        }
+
+        .slide-title {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .slide-subtitle {
+            font-size: 1.4em;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 0;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 50px;
+            min-height: 0;
+            overflow: auto;
+            overscroll-behavior: contain;
+        }
+
+        .content-text {
+            flex: 1;
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .image-placeholder {
+            flex: 0 0 320px;
+            background: #ffffff;
+            border: 2px dashed #96a3c6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2a5298;
+            font-size: 1.05em;
+            text-align: center;
+            padding: 20px;
+            box-shadow: inset 0 0 0 6px rgba(42, 82, 152, 0.04);
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .workflow-step {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-right: 5px solid #2a5298;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .org-box {
+            background: linear-gradient(135deg, #2a5298, #1e3c72);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 8px 25px rgba(42, 82, 152, 0.3);
+            min-width: 200px;
+        }
+
+        .org-level {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .org-connector {
+            width: 2px;
+            height: 20px;
+            background: #2a5298;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 50%;
+            transform: translateX(50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 3px 12px rgba(30, 60, 114, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .control-btn:hover::before {
+            left: 100%;
+        }
+
+        .control-btn:hover {
+            background: linear-gradient(135deg, #2a5298, #3b82f6);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 60, 114, 0.35);
+        }
+
+        .control-btn:active {
+            transform: translateY(0px);
+            box-shadow: 0 2px 10px rgba(30, 60, 114, 0.25);
+        }
+
+        .control-btn.play-btn {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+
+        .control-btn.play-btn:hover {
+            background: linear-gradient(135deg, #10b981, #34d399);
+        }
+
+        .control-btn.stop-btn {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        .control-btn.stop-btn:hover {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+        }
+
+        .control-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1em;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 25px rgba(30, 60, 114, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            direction: ltr;
+            z-index: 1000;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #1e3c72, #2a5298, #3b82f6);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+            box-shadow: 0 2px 10px rgba(30, 60, 114, 0.4);
+        }
+
+        .dots {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 8px;
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(30, 60, 114, 0.3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .dot::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: transparent;
+            transition: background 0.3s ease;
+        }
+
+        .dot:hover {
+            background: #2a5298;
+            transform: scale(1.15);
+        }
+
+        .dot:hover::before {
+            background: rgba(42, 82, 152, 0.1);
+        }
+
+        .dot.active {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            transform: scale(1.25);
+            box-shadow: 0 3px 10px rgba(30, 60, 114, 0.35);
+        }
+
+        .dot.active::before {
+            background: rgba(42, 82, 152, 0.2);
+        }
+
+        .slide-content video {
+            flex: 0 0 320px;
+            background: #000000;
+            border: 2px solid #96a3c6;
+            border-radius: 12px;
+            width: 320px;
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+            box-shadow: inset 0 0 0 6px rgba(42, 82, 152, 0.04);
+        }
+
+        .ministry-logo {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            width: 90px;
+            height: 90px;
+            background-image: url('logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.3));
+            z-index: 10;
+        }
+
+        ul {
+            padding-right: 20px;
+        }
+
+        li {
+            margin: 10px 0;
+            position: relative;
+        }
+
+        li::before {
+            content: "◄";
+            color: #2a5298;
+            font-weight: bold;
+            position: absolute;
+            right: -15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #fef3c7, #fbbf24);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="slide-counter" id="slideCounter">1 / 9</div>
+
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active">
+            <div class="ministry-logo"></div>
+            <div class="slide-header">
+                <h1 class="slide-title">عرض تقديمي</h1>
+                <p class="slide-subtitle">آلية العمل بالإدارة العامة لمكتب وكيل وزارة الداخلية</p>
+            </div>
+            <div class="slide-content">
+                <div class="intro-card" style="padding-top: 20px;">
+                    <div class="greeting-section" style="display: flex; align-items: center; gap: 40px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(245, 248, 252, 0.98)); padding: 40px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15);">
+                        <div class="text-content" style="flex: 1.5;">
+                            <p style="font-size: 1.4em; line-height: 2; color: #2d3748; text-align: justify; margin: 0; font-weight: 500;">
+                                سيدي سعادة وكيل وزارة الداخلية الموقر، يسرنا أن نقدم لسعادتكم هذا العرض التقديمي المفصل حول الهيكل التنظيمي وآلية العمل بالإدارة العامة لمكتب وكيل الوزارة، بهدف تعزيز الكفاءة والشفافية.
+                            </p>
+                        </div>
+                        <div class="image-content" style="flex: 1;">
+                            <img src="GtbGrDKX0AAJPtx.png" alt="مبنى وزارة الداخلية" style="width: 100%; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 3px solid white;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Organizational Structure -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-header" style="padding-top: 22px; padding-bottom: 22px;">
+                <h1 class="slide-title mt-2">الهيكل التنظيمي للإدارة العامة</h1>
+            </div>
+            <div class="slide-content">
+                <div class="content-text">
+                    <div class="modern-org-chart" style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+                        
+                        <!-- Top Level: General Director -->
+                        <div class="org-level-1" style="text-align: center; margin-bottom: 35px;">
+                            <div class="org-box-top" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 20px 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3); font-size: 1.1em; font-weight: 700; max-width: 450px; margin: 0 auto; border: 3px solid #fbbf24;">
+                                مدير عام الإدارة العامة لمكتب وكيل الوزارة
+                            </div>
+                        </div>
+
+                        <!-- Connector Line -->
+                        <div class="connector-line" style="width: 2px; height: 25px; background: #f59e0b; margin: 0 auto 15px;"></div>
+
+                        <!-- Second Level: Assistant Directors -->
+                        <div class="org-level-2" style="display: grid; grid-template-columns: repeat(3, minmax(220px, 1fr)); gap: 40px; align-items: start; justify-items: center; margin-bottom: 20px; max-width: 950px; margin-left: auto; margin-right: auto; padding: 0 20px;">
+                            <div class="org-box-assistant" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 18px 25px; border-radius: 12px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3); font-size: 0.95em; font-weight: 600; text-align: center; min-width: 220px; border: 2px solid #34d399;">
+                                مساعد المدير العام للشئون الفنية
+                            </div>
+                            <div class="org-box-office" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 16px 25px; border-radius: 12px; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3); font-size: 0.95em; font-weight: 600; min-width: 240px; text-align: center; border: 2px solid #60a5fa;">
+                                إدارة المكتب الفني
+                            </div>
+                            <div class="org-box-assistant" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 18px 25px; border-radius: 12px; box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3); font-size: 0.95em; font-weight: 600; text-align: center; min-width: 220px; border: 2px solid #34d399;">
+                                مساعد المدير العام لشئون المكتب
+                            </div>
+                        </div>
+
+                        <!-- Branches: Departments under each Assistant -->
+                        <div class="org-branches" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; justify-items: center; max-width: 1000px; margin: 0 auto 10px; padding: 0 20px;">
+                            <!-- Left Branch: تحت الشئون الفنية -->
+                            <div class="branch-left" style="text-align: center; width: 100%;">
+                                <div style="width: 2px; height: 22px; background: #10b981; margin:0 150px 10px auto;"></div>
+                                <div style="display: grid; grid-template-columns: repeat(3, minmax(180px, 1fr)); gap: 12px;">
+                                    <div class="org-box-dept" style="background: linear-gradient(135deg, #1e40af, #1d4ed8); color: white; padding: 15px 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3); font-size: 0.85em; font-weight: 500; text-align: center; border: 2px solid #3b82f6; min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        إدارة السجل العام
+                                    </div>
+                                    <div class="org-box-dept" style="background: linear-gradient(135deg, #1e40af, #1d4ed8); color: white; padding: 15px 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3); font-size: 0.85em; font-weight: 500; text-align: center; border: 2px solid #3b82f6; min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        إدارة التخطيط والتنظيم
+                                    </div>
+                                    <div class="org-box-dept" style="background: linear-gradient(135deg, #1e40af, #1d4ed8); color: white; padding: 15px 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3); font-size: 0.85em; font-weight: 500; text-align: center; border: 2px solid #3b82f6; min-height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        إدارة الخدمات المالية والإدارية والصيانة
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Right Branch: تحت شئون المكتب -->
+                            <div class="branch-right" style="text-align: center; width: 100%;">
+                                <div style="width: 2px; height: 22px; background: #10b981; margin: 0 auto 12px;"></div>
+                                <div class="org-box-dept" style="background: linear-gradient(135deg, #1e40af, #1d4ed8); color: white; padding: 15px 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3); font-size: 0.85em; font-weight: 500; text-align: center; border: 2px solid #3b82f6; min-height: 60px; display: flex; align-items: center; justify-content: center; max-width: 320px; margin: 0 auto;">
+                                    إدارة الخدمات المجتمعية
+                                </div>
+                                <div class="org-box-dept mt-4" style="background: linear-gradient(135deg, #1e40af, #1d4ed8); color: white; padding: 15px 18px; border-radius: 10px; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3); font-size: 0.85em; font-weight: 500; text-align: center; border: 2px solid #3b82f6; min-height: 60px; display: flex; align-items: center; justify-content: center; max-width: 320px; margin: 0 auto;">
+                                    إدارة شئون المكتب 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Video + Incoming Mail -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-content" style="display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 40px; padding: 2rem 3rem; height: 100%;">
+                <div class="content-text" style="text-align: right; display: flex; flex-direction: column; justify-content: center;">
+                    <h1 style="font-size: 2.8rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">إستلام البريد الوارد</h1>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem;">تعد مرحلة استلام البريد الوارد حجر الزاوية في آلية العمل، حيث يتم استقبال جميع المراسلات الرسمية بدقة وعناية فائقة. يشمل ذلك:</p>
+                    <ul style="font-size: 1.1rem; line-height: 1.9; padding-right: 25px; margin-bottom: 1rem;">
+                        <li><strong>من قطاعات الوزارة المختلفة:</strong> مثل قطاع الأمن العام، قطاع الجنسية والجوازات، وغيرها.</li>
+                        <li><strong>من الجهات الخارجية:</strong> كالوزارات الحكومية، الهيئات المستقلة، والمؤسسات الأخرى.</li>
+                    </ul>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">يتم تسجيل كل وثيقة فور وصولها لضمان عدم فقدان أي مراسلات.</p>
+                </div>
+                <div style="display:flex; justify-content:center; align-items:center;">
+                    <video id="incomingVideo" style="width: 100%; height: 550px; object-fit: cover; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); cursor: pointer; border: 3px solid white;"
+                           src="WhatsApp Video 2025-08-11 at 11.00.56_8cd59517.mp4" title="استلام البريد الوارد"
+                           muted playsinline preload="metadata">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Incoming Video Modal -->
+        <div class="modal fade" id="incomingVideoModal" tabindex="-1" aria-labelledby="incomingVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 90vw;">
+                <div class="modal-content" style="background: #0f172a;">
+                    <div class="modal-body p-0 position-relative" style="display: flex; justify-content: center; align-items: center;">
+                        <button type="button" class="btn-close btn-close-white position-absolute" style="left: 12px; top: 12px; z-index: 10;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <video id="incomingVideoLarge" style="width: 100%; height: auto; max-height: 88vh; outline: none;" controls playsinline></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Presenting to Deputy Minister -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-content" style="display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 40px; padding: 2rem 3rem; height: 100%;">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); gap: 15px; height: 500px;">
+                    <img src="WhatsApp Image 2025-08-10 at 13.57.59_4e701f40.jpg" style="grid-column: 1 / 2; grid-row: 1 / 3; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid white;">
+                    <img src="WhatsApp Image 2025-08-10 at 13.58.00_a431aa3a.jpg" style="grid-column: 2 / 3; grid-row: 1 / 2; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid white;">
+                    <img src="WhatsApp Image 2025-08-10 at 13.57.58_b3bd770c.jpg" style="grid-column: 2 / 3; grid-row: 2 / 3; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid white;">
+                </div>
+                <div class="content-text" style="text-align: right; display: flex; flex-direction: column; justify-content: center;">
+                    <h1 style="font-size: 2.8rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">عرض البريد على سعادة وكيل الوزارة</h1>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem;">بعد الاستلام، يتم فرز وتصنيف البريد الوارد تمهيداً لعرضه على سعادة وكيل الوزارة. هذه الخطوة حاسمة لضمان إطلاع سعادته على كافة المستجدات والقضايا الهامة.</p>
+                    <ul style="font-size: 1.1rem; line-height: 1.9; padding-right: 25px; margin-bottom: 1rem;">
+                        <li><strong>التحقق والمراجعة الأولية:</strong> يقوم فريق العمل بمراجعة الوثائق للتأكد من اكتمالها ووضوحها.</li>
+                        <li><strong>التصنيف حسب الأهمية:</strong> يتم ترتيب المراسلات وفقاً لأولويتها، لضمان معالجة العاجل منها فوراً.</li>
+                    </ul>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">هذه المرحلة تضمن اتخاذ القرارات السريعة والمناسبة.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Settlement and Documentation -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-content" style="flex-direction: column; justify-content: flex-start; text-align: center; padding: 2rem 3rem;">
+                <h1 style="font-size: 2.8rem; font-weight: bold; margin-bottom: 1rem; margin-top:4rem;">تسديد البريد وتوثيقه</h1>
+                <p style="font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto 2.5rem auto;">بعد اطلاع سعادة وكيل الوزارة، يتم تسديد المراسلات وتسجيلها رسمياً في نظام المتابعة. هذه الخطوة حيوية لتتبع مسار الوثائق وتحديد المسؤوليات.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; width: 100%; max-width: 1100px; margin: 0 auto;">
+                    
+                    <!-- Card 1: التسجيل الدقيق -->
+                    <div class="info-card" style="background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 20px; text-align: center; border-top: 5px solid #3b82f6;">
+                        <img src="WhatsApp Image 2025-08-10 at 13.57.58_5aff3919.jpg" alt="التسجيل الدقيق" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #1e3c72;">1. التسجيل الدقيق</h3>
+                        <p style="font-size: 1rem; line-height: 1.7;">تسجيل تاريخ التسديد، اسم الجهة المرسلة، والموضوع، بالإضافة إلى رقم الوارد.</p>
+                    </div>
+
+                    <!-- Card 2: التوجيهات والقرارات -->
+                    <div class="info-card" style="background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 20px; text-align: center; border-top: 5px solid #10b981;">
+                        <img src="WhatsApp Image 2025-08-10 at 13.57.58_e81a0c12.jpg" alt="التوجيهات والقرارات" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #1e3c72;">2. التوجيهات والقرارات</h3>
+                        <p style="font-size: 1rem; line-height: 1.7;">تثبيت أي توجيهات أو قرارات صادرة من سعادة وكيل الوزارة على الوثيقة.</p>
+                    </div>
+
+                    <!-- Card 3: المتابعة الفعالة -->
+                    <div class="info-card" style="background: #fff; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 20px; text-align: center; border-top: 5px solid #f59e0b;">
+                        <img src="WhatsApp Image 2025-08-10 at 13.57.59_89f8d03c.jpg" alt="المتابعة الفعالة" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 15px;">
+                        <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #1e3c72;">3. المتابعة الفعالة</h3>
+                        <p style="font-size: 1rem; line-height: 1.7;">تمكين عملية متابعة حالة المراسلات والردود المطلوبة بدقة.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+                <!-- Slide 6: Scanning and Attachments -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-content" style="display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; gap: 40px; padding: 2rem 6rem 2rem 2rem; height: 100%;">
+                <div class="content-text" style="text-align: right; display: flex; flex-direction: column; justify-content: center;">
+                    <h1 style="font-size: 2.8rem; font-weight: bold; margin-bottom: 2rem;">تصوير الكتب والمرفقات</h1>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1rem;">تلي عملية التسديد مرحلة تصوير الكتاب ومرفقاته، وهي خطوة أساسية لإنشاء نسخ احتياطية وتسهيل عملية الأرشفة اللاحقة. تضمن هذه العملية:</p>
+                    <ul style="font-size: 1.1rem; line-height: 1.9; padding-right: 25px; margin-bottom: 1rem;">
+                        <li><strong>الحفاظ على النسخ الأصلية:</strong> تقليل التعامل المباشر مع الوثائق الأصلية لحمايتها.</li>
+                        <li><strong>تسهيل الوصول:</strong> توفير نسخ رقمية يمكن الوصول إليها بسهولة وسرعة عند الحاجة.</li>
+                        <li><strong>تحضير للأرشفة:</strong> تجهيز الوثائق لعمليات الأرشفة الإلكترونية أو اليدوية.</li>
+                    </ul>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">تسهم هذه المرحلة في حماية المعلومات وتعزيز الكفاءة التشغيلية.</p>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                    <video id="scanningVideo" src="WhatsApp Video 2025-08-11 at 11.00.57_77bf7fd1.mp4" style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); cursor: pointer; border: 3px solid white;" autoplay loop muted playsinline data-bs-toggle="modal" data-bs-target="#scanningVideoModal"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Outgoing Mail -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-content" style="display: grid; grid-template-columns: 1fr 1.3fr; align-items: center; gap: 50px; padding: 2rem 4rem; height: 100%;">
+                
+                <!-- Left Side: Media Content -->
+                <div style="display: flex; flex-direction: column; gap: 25px; height: 100%; justify-content: center;">
+                    <div style="background: #f8fafc; border-radius: 15px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
+                        <img src="WhatsApp Image 2025-08-10 at 13.57.58_b3bd770c.jpg" style="width: 100%; height: 280px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+                        <p style="text-align: center; margin-top: 15px; font-size: 0.95rem; color: #64748b; font-weight: 500;">نموذج من الوثائق الرسمية</p>
+                    </div>
+                    
+                    <div style="background: #f1f5f9; border-radius: 15px; padding: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
+                        <video id="outgoingVideo" src="WhatsApp Video 2025-08-11 at 11.00.57_77bf7fd1.mp4" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); cursor: pointer;" autoplay loop muted playsinline data-bs-toggle="modal" data-bs-target="#outgoingVideoModal"></video>
+                        <p style="text-align: center; margin-top: 15px; font-size: 0.95rem; color: #64748b; font-weight: 500;">آلية معالجة المراسلات</p>
+                    </div>
+                </div>
+
+                <!-- Right Side: Content -->
+                <div class="content-text" style="text-align: right; display: flex; flex-direction: column; justify-content: center; padding-right: 20px;">
+                    <h1 style="font-size: 2.8rem; font-weight: 700; margin-bottom: 1.5rem; color: #1e293b;">مرحلة الصادر</h1>
+                    <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 2.5rem; color: #475569;">يتضمن نظام الصادر في الإدارة العامة آليتين متكاملتين لضمان فعالية التواصل الرسمي مع كافة الجهات الداخلية والخارجية</p>
+                    
+                    <!-- Section 1: Electronic Correspondence -->
+                    <div style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 25px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; color: #2563eb; display: flex; align-items: center; gap: 12px;">
+                            <span style="background: #dbeafe; color: #2563eb; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700;">1</span>
+                            التراسل الإلكتروني
+                        </h3>
+                        <ul style="font-size: 1.05rem; line-height: 1.8; padding-right: 20px; margin: 0; color: #334155; list-style: none;">
+                            <li style="margin-bottom: 12px;">
+                                للمراسلات الداخلية والخارجية عبر الأنظمة الرقمية المعتمدة
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                يضمن السرعة والدقة في إيصال المعلومات الرسمية
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                يحقق الكفاءة التشغيلية ويقلل من الاستهلاك الورقي
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Section 2: Manual and Electronic Outgoing -->
+                    <div style="background: #ffffff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3 style="font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; color: #059669; display: flex; align-items: center; gap: 12px;">
+                            <span style="background: #d1fae5; color: #059669; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700;">2</span>
+                            الصادر اليدوي والإلكتروني
+                        </h3>
+                        <ul style="font-size: 1.05rem; line-height: 1.8; padding-right: 20px; margin: 0; color: #334155; list-style: none;">
+                            <li style="margin-bottom: 12px;">
+                                للمراسلات التي تستلزم التسليم الشخصي أو البريد التقليدي
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                تسجيل وتوثيق كل كتاب صادر برقم وتاريخ رسمي
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                يُستخدم في الحالات التي تتطلب التوثيق المادي
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Slide 8: Archiving Stage -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+            <div class="slide-content" style="display: grid; grid-template-columns: 1fr 1.2fr; align-items: center; gap: 40px; padding: 2rem 3rem; height: 100%;">
+                <div style="display: flex; flex-direction: column; gap: 15px; height: 520px;">
+                    <video id="archivingVideo" src="WhatsApp Video 2025-08-11 at 11.00.57_3c5c8ba2.mp4" style="width: 100%; height: 60%; object-fit: cover; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.18); cursor: pointer; border: 3px solid white;" autoplay loop muted playsinline data-bs-toggle="modal" data-bs-target="#archivingVideoModal"></video>
+                    <img src="WhatsApp Image 2025-08-10 at 13.57.59_bed3ad94.jpg" style="width: 100%; height: 40%; object-fit: cover; border-radius: 14px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); border: 2px solid white;">
+                </div>
+                <div class="content-text" style="text-align: right; display: flex; flex-direction: column; justify-content: center;">
+                    <h1 style="font-size: 2.8rem; font-weight: bold; margin-bottom: 2rem;">مرحلة الأرشفة: إلكترونية ويدوية</h1>
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">تعد الأرشفة النهائية للوثائق ضرورية للحفاظ على السجلات وضمان إمكانية الرجوع إليها مستقبلاً، وتنقسم إلى نوعين:</p>
+                    <div class="archiving-methods" style="display: flex; flex-direction: column; gap: 20px; margin-top: 1.5rem;">
+                        <!-- Electronic Archiving -->
+                        <div class="archiving-method" style="background: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 20px; border-left: 5px solid #3b82f6;">
+                            <i class="fas fa-archive" style="font-size: 2.5rem; color: #3b82f6;"></i>
+                            <div>
+                                <h3 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin: 0 0 5px 0;">الأرشفة الإلكترونية</h3>
+                                <p style="font-size: 1rem; line-height: 1.7; color: #475569; margin: 0;">يتم حفظ نسخ رقمية من جميع المراسلات والوثائق في قواعد بيانات آمنة. هذا يسهل البحث والاسترجاع ويوفر مساحة تخزين كبيرة.</p>
+                            </div>
+                        </div>
+                        <!-- Manual Archiving -->
+                        <div class="archiving-method" style="background: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.07); display: flex; align-items: center; gap: 20px; border-left: 5px solid #10b981;">
+                            <i class="fas fa-folder-open" style="font-size: 2.5rem; color: #10b981;"></i>
+                            <div>
+                                <h3 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin: 0 0 5px 0;">الأرشفة اليدوية</h3>
+                                <p style="font-size: 1rem; line-height: 1.7; color: #475569; margin: 0;">تستخدم للوثائق التي تتطلب حفظاً مادياً، مع فهرسة إلكترونية لمواقعها. يضمن ذلك سهولة تحديد مكان الوثيقة المادية عند الحاجة.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">تجمع هذه المنهجية بين مرونة الأرشفة الرقمية وأهمية الحفظ المادي للوثائق الضرورية.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Conclusion -->
+        <div class="slide">
+            <div class="ministry-logo"></div>
+                <div class="slide-content" style="text-align: center; justify-content: center; flex-direction: column;">
+                <h1 style="font-size: 3.5rem; font-weight: bold; margin-bottom: 1rem;">نرحّب بسعادة وكيل الوزارة</h1>
+                <p style="font-size: 1.2rem; line-height: 2; max-width: 900px; margin: 0.5rem auto 0; color: #475569;">
+                    يسعدنا الترحيب بسعادتكم بتولّيكم مهامكم حديثاً، ونتطلع تحت قيادتكم إلى مواصلة تطوير منظومة العمل،
+                    وتعزيز التحول الرقمي، ورفع كفاءة خدمات المراسلات والأرشفة بما يواكب تطلعات الوزارة.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.9; margin: 1rem auto 0; color: #64748b;">
+                    نثمّن ثقتكم ودعمكم المبكر، ونعاهدكم على العمل بروح الفريق لتحقيق أثر ملموس خلال المرحلة المقبلة.
+                </p>
+                <p style="font-size: 1rem; line-height: 1.8; margin: 0.5rem auto 0; color: #64748b;">
+                    مع خالص التقدير — الإدارة العامة لمكتب وكيل الوزارة
+                </p>
+                </div>
+        </div>
+        
+    </div>
+
+    <!-- Video Modals -->
+    <div id="video-modals-container">
+        <!-- Incoming Video Modal -->
+        <div class="modal fade" id="incomingVideoModal" tabindex="-1" aria-labelledby="incomingVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 90vw;">
+                <div class="modal-content" style="background: #0f172a;">
+                    <div class="modal-body p-0 position-relative" style="display: flex; justify-content: center; align-items: center;">
+                        <button type="button" class="btn-close btn-close-white position-absolute" style="left: 12px; top: 12px; z-index: 10;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <video id="incomingVideoLarge" style="width: 100%; height: auto; max-height: 88vh; outline: none;" controls playsinline></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scanning Video Modal -->
+        <div class="modal fade" id="scanningVideoModal" tabindex="-1" aria-labelledby="scanningVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 90vw;">
+                <div class="modal-content" style="background: #0f172a;">
+                    <div class="modal-body p-0 position-relative" style="display: flex; justify-content: center; align-items: center;">
+                        <button type="button" class="btn-close btn-close-white position-absolute" style="left: 12px; top: 12px; z-index: 10;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <video id="scanningVideoLarge" style="width: 100%; height: auto; max-height: 88vh; outline: none;" controls playsinline></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Outgoing Video Modal -->
+        <div class="modal fade" id="outgoingVideoModal" tabindex="-1" aria-labelledby="outgoingVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 90vw;">
+                <div class="modal-content" style="background: #0f172a;">
+                    <div class="modal-body p-0 position-relative" style="display: flex; justify-content: center; align-items: center;">
+                        <button type="button" class="btn-close btn-close-white position-absolute" style="left: 12px; top: 12px; z-index: 10;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <video id="outgoingVideoLarge" style="width: 100%; height: auto; max-height: 88vh; outline: none;" controls playsinline></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Archiving Video Modal -->
+        <div class="modal fade" id="archivingVideoModal" tabindex="-1" aria-labelledby="archivingVideoModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 90vw;">
+                <div class="modal-content" style="background: #0f172a;">
+                    <div class="modal-body p-0 position-relative" style="display: flex; justify-content: center; align-items: center;">
+                        <button type="button" class="btn-close btn-close-white position-absolute" style="left: 12px; top: 12px; z-index: 10;" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <video id="archivingVideoLarge" style="width: 100%; height: auto; max-height: 88vh; outline: none;" controls playsinline></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dots" id="dots" aria-label="التنقل بين الشرائح"></div>
+
+    <div class="controls">
+        <button class="control-btn" id="prevBtn" onclick="changeSlide(-1)" title="الشريحة السابقة">
+            <i class="fas fa-chevron-right" style="font-size: 1.2em;"></i>
+        </button>
+        <button class="control-btn play-btn" id="playBtn" onclick="toggleAutoPlay()" title="تشغيل تلقائي">
+            <i id="playIcon" class="fas fa-play" style="font-size: 1.2em;"></i>
+        </button>
+        <button class="control-btn" id="nextBtn" onclick="changeSlide(1)" title="الشريحة التالية">
+            <i class="fas fa-chevron-left" style="font-size: 1.2em;"></i>
+        </button>
+        <button class="control-btn" onclick="goToSlide(1)" title="العودة للبداية">
+            <i class="fas fa-step-forward" style="font-size: 1.2em;"></i>
+        </button>
+        <button class="control-btn" onclick="goToSlide(totalSlides)" title="الذهاب للنهاية">
+            <i class="fas fa-step-backward" style="font-size: 1.2em;"></i>
+        </button>
+        <button class="control-btn" onclick="toggleFullScreen()" title="ملء الشاشة">
+            <i class="fas fa-expand" style="font-size: 1.2em;"></i>
+        </button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 9;
+        let isAutoPlaying = false;
+        let autoPlayInterval;
+
+        function buildDots(count) {
+            const dots = document.getElementById('dots');
+            dots.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                const b = document.createElement('button');
+                b.className = 'dot';
+                b.setAttribute('aria-label', 'اذهب إلى الشريحة ' + i);
+                b.addEventListener('click', () => goToSlide(i));
+                dots.appendChild(b);
+            }
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((d, idx) => d.classList.toggle('active', idx === currentSlide - 1));
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            // Pause any playing videos before switching slides
+            document.querySelectorAll('video').forEach(v => {
+                try { v.pause(); } catch(e) {}
+            });
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+            
+            const progress = (currentSlide / totalSlides) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+            updateDots();
+
+            // Autoplay videos when their slide is active
+            if (currentSlide === 3) {
+                document.getElementById('incomingVideo')?.play();
+            } else if (currentSlide === 6) {
+                document.getElementById('scanningVideo')?.play();
+            } else if (currentSlide === 7) {
+                const outgoingVideo = document.getElementById('outgoingVideo');
+                if(outgoingVideo) outgoingVideo.play();
+            } else if (currentSlide === 8) {
+                const archivingVideo = document.getElementById('archivingVideo');
+                if(archivingVideo) archivingVideo.play();
+            }
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide(currentSlide);
+        }
+
+        function toggleAutoPlay() {
+            const playBtn = document.getElementById('playBtn');
+            const playIcon = document.getElementById('playIcon');
+            
+            if (isAutoPlaying) {
+                clearInterval(autoPlayInterval);
+                playIcon.className = 'fas fa-play';
+                playBtn.className = 'control-btn play-btn';
+                playBtn.title = 'تشغيل تلقائي';
+                isAutoPlaying = false;
+            } else {
+                autoPlayInterval = setInterval(() => {
+                    if (currentSlide < totalSlides) {
+                        changeSlide(1);
+                    } else {
+                        currentSlide = 1;
+                        showSlide(currentSlide);
+                    }
+                }, 6000);
+                playIcon.className = 'fas fa-pause';
+                playBtn.className = 'control-btn stop-btn';
+                playBtn.title = 'إيقاف التشغيل';
+                isAutoPlaying = true;
+            }
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    changeSlide(1);
+                    break;
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    changeSlide(-1);
+                    break;
+                case 'Home':
+                    goToSlide(1);
+                    break;
+                case 'End':
+                    goToSlide(totalSlides);
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    changeSlide(1);
+                    break;
+                case 'f':
+                    toggleFullScreen();
+                    break;
+            }
+        });
+
+
+
+        // Touch/swipe support
+        let startX = 0;
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+        document.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const dx = endX - startX;
+            if (Math.abs(dx) > 50) {
+                if (dx < 0) changeSlide(1); // swipe left -> next
+                else changeSlide(-1); // swipe right -> prev
+            }
+        }, { passive: true });
+
+        // Initialize after DOM ready
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('slideCounter').textContent = `${currentSlide} / ${totalSlides}`;
+            buildDots(totalSlides);
+            showSlide(currentSlide);
+
+            // Generic function to handle video modals
+            const setupVideoModal = (thumbId, largeId, modalId) => {
+                const thumbVideo = document.getElementById(thumbId);
+                const largeVideo = document.getElementById(largeId);
+                const modalEl = document.getElementById(modalId);
+                
+                if (thumbVideo && largeVideo && modalEl && window.bootstrap) {
+                    const videoModal = new bootstrap.Modal(modalEl);
+                    
+                    thumbVideo.addEventListener('click', () => {
+                        largeVideo.src = thumbVideo.currentSrc || thumbVideo.getAttribute('src');
+                        videoModal.show();
+                    });
+
+                    modalEl.addEventListener('shown.bs.modal', () => {
+                        try { largeVideo.play(); } catch(e) {}
+                    });
+
+                    modalEl.addEventListener('hidden.bs.modal', () => {
+                        try { largeVideo.pause(); } catch(e) {}
+                        largeVideo.currentTime = 0;
+                    });
+                }
+            };
+
+            // Setup for all video modals
+            setupVideoModal('incomingVideo', 'incomingVideoLarge', 'incomingVideoModal');
+            setupVideoModal('scanningVideo', 'scanningVideoLarge', 'scanningVideoModal');
+            setupVideoModal('outgoingVideo', 'outgoingVideoLarge', 'outgoingVideoModal');
+            setupVideoModal('archivingVideo', 'archivingVideoLarge', 'archivingVideoModal');
+        });
+    </script>
+        <!-- Scanning Video Modal -->
+    <div class="modal fade" id="scanningVideoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content bg-transparent border-0">
+                <div class="modal-body p-0">
+                    <video id="scanningVideoLarge" style="max-height: 85vh; width: auto; max-width: 100%; border-radius: 10px;" controls>
+                        <source src="" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Outgoing Video Modal -->
+    <div class="modal fade" id="outgoingVideoModal" tabindex="-1" aria-labelledby="outgoingVideoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 90vw;">
+            <div class="modal-content" style="background: #0f172a;">
+                <div class="modal-body p-0 position-relative" style="display: flex; justify-content: center; align-items: center;">
+                    <button type="button" class="btn-close btn-close-white position-absolute" style="left: 12px; top: 12px; z-index: 10;" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <video id="outgoingVideoLarge" style="width: 100%; height: auto; max-height: 88vh; outline: none;" controls playsinline loop></video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle (Popper included) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

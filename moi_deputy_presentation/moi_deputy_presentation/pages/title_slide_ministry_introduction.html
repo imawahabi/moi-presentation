@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظام إدارة المراسلات - وزارة الداخلية</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .delay-1 { animation-delay: 0.3s; }
+        .delay-2 { animation-delay: 0.6s; }
+        .delay-3 { animation-delay: 0.9s; }
+        .delay-4 { animation-delay: 1.2s; }
+        .delay-5 { animation-delay: 1.5s; }
+        
+        .geometric-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                linear-gradient(45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.02) 25%, transparent 25%);
+            background-size: 200px 200px, 300px 300px, 60px 60px, 60px 60px;
+        }
+        
+        .slide-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1B365D 0%, #243B53 50%, #334E68 100%);
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.3));
+        }
+        
+        .progress-bar {
+            width: 11.11%; /* 1 of 9 slides */
+            transition: width 0.3s ease;
+        }
+        
+        .nav-button {
+            transition: all 0.2s ease;
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(27, 54, 93, 0.3);
+        }
+    </style>
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fmoideputy9736back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="font-body">
+    <!-- Main Slide Container -->
+    <div class="slide-container geometric-pattern relative overflow-hidden">
+        <!-- Header with Ministry Logo -->
+        <header class="absolute top-8 right-8 z-10">
+            <div class="flex items-center gap-4 animate-fade-in">
+                <!-- Ministry of Interior Logo -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 logo-glow">
+                    <svg width="80" height="80" viewBox="0 0 100 100" class="text-accent">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#CA8A04;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <!-- Shield Shape -->
+                        <path d="M50 10 L20 25 L20 60 Q20 80 50 90 Q80 80 80 60 L80 25 Z" fill="url(#logoGradient)" stroke="#1B365D" stroke-width="2"/>
+                        <!-- Interior Symbol -->
+                        <circle cx="50" cy="40" r="12" fill="#1B365D"/>
+                        <rect x="45" y="55" width="10" height="20" fill="#1B365D" rx="2"/>
+                        <!-- Arabic Text Placeholder -->
+                        <text x="50" y="85" text-anchor="middle" fill="#1B365D" font-size="8" font-weight="bold">MOI</text>
+                    </svg>
+                </div>
+                <!-- Kuwait National Emblem -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3">
+                    <svg width="60" height="60" viewBox="0 0 100 100" class="text-accent">
+                        <!-- Kuwait Emblem Simplified -->
+                        <circle cx="50" cy="50" r="35" fill="none" stroke="url(#logoGradient)" stroke-width="3"/>
+                        <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="url(#logoGradient)"/>
+                        <circle cx="50" cy="50" r="8" fill="#1B365D"/>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex items-center justify-center min-h-screen px-8">
+            <div class="text-center max-w-4xl mx-auto">
+                <!-- Main Title in Arabic -->
+                <h1 class="font-headline text-6xl md:text-7xl font-bold text-white mb-6 animate-fade-in-up">
+                    نظام إدارة المراسلات
+                </h1>
+                
+                <!-- Subtitle -->
+                <div class="text-accent text-2xl md:text-3xl font-semibold mb-8 animate-fade-in-up delay-1">
+                    وزارة الداخلية - دولة الكويت
+                </div>
+                
+                <!-- English Subtitle -->
+                <div class="text-white/80 text-xl md:text-2xl mb-12 animate-fade-in-up delay-2" dir="ltr">
+                    Correspondence Management System<br />
+                    Ministry of Interior - State of Kuwait
+                </div>
+                
+                <!-- Formal Introduction -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-12 animate-fade-in-up delay-3">
+                    <div class="text-white text-xl md:text-2xl font-medium mb-4">
+                        مقدم إلى معالي نائب الوزير المحترم
+                    </div>
+                    <div class="text-accent text-lg">
+                        عرض تقديمي شامل لنظام إدارة المراسلات والوثائق
+                    </div>
+                </div>
+                
+                <!-- Presentation Details -->
+                <div class="grid md:grid-cols-2 gap-6 mb-12 animate-fade-in-up delay-4">
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <div class="text-accent text-sm font-semibold mb-2">التاريخ</div>
+                        <div class="text-white text-lg">11/08/2025</div>
+                    </div>
+                    <div class="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                        <div class="text-accent text-sm font-semibold mb-2">المقدم من</div>
+                        <div class="text-white text-lg">إدارة تطوير الأنظمة</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Navigation Controls -->
+        <nav class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-fade-in delay-5">
+            <div class="flex items-center gap-4 bg-white/10 backdrop-blur-sm rounded-full px-6 py-4">
+                <!-- Previous Button (Disabled) -->
+                <button class="nav-button bg-white/20 text-white/50 px-4 py-2 rounded-full cursor-not-allowed" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                
+                <!-- Slide Counter -->
+                <div class="text-white text-sm font-medium px-4">
+                    1 من 6
+                </div>
+                
+                <!-- Next Button -->
+                <a href="organizational_chart_ministry_hierarchy.html" class="nav-button bg-accent hover:bg-accent-600 text-primary px-4 py-2 rounded-full transition-all duration-200">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Progress Indicator -->
+        <div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+            <div class="progress-bar h-full bg-accent transition-all duration-300"></div>
+        </div>
+
+        <!-- Quick Navigation Menu -->
+        <div class="absolute top-8 left-8 animate-fade-in delay-1">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div class="text-white text-sm font-semibold mb-3">الانتقال السريع</div>
+                <div class="space-y-2">
+                    <a href="title_slide_ministry_introduction.html" class="block text-accent text-sm hover:text-accent-400 transition-colors">
+                        • المقدمة
+                    </a>
+                    <a href="organizational_chart_ministry_hierarchy.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • الهيكل التنظيمي
+                    </a>
+                    <a href="process_overview_mail_workflow_summary.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • نظرة عامة على العمليات
+                    </a>
+                    <a href="mail_reception_stage_intake_process_detail.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة استقبال المراسلات
+                    </a>
+                    <a href="deputy_review_stage_executive_approval_process.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة مراجعة نائب الوزير
+                    </a>
+                    <a href="document_processing_stage_administrative_workflow.html" class="block text-white/70 text-sm hover:text-white transition-colors">
+                        • مرحلة معالجة الوثائق
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard Navigation Hint -->
+        <div class="absolute bottom-20 right-8 animate-fade-in delay-5">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-3 text-white/60 text-sm">
+                <div class="flex items-center gap-2 mb-1">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">←</kbd>
+                    <span>السابق</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <kbd class="bg-white/20 px-2 py-1 rounded text-xs">→</kbd>
+                    <span>التالي</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Keyboard Navigation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'ArrowRight':
+                    case ' ':
+                        window.location.href = 'organizational_chart_ministry_hierarchy.html';
+                        break;
+                    case 'Home':
+                        window.location.href = 'title_slide_ministry_introduction.html';
+                        break;
+                }
+            });
+
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
