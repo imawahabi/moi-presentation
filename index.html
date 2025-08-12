@@ -414,9 +414,23 @@
         }
 
         .control-btn:disabled {
-            background: #ccc;
+            background: #d1d5db;
+            color: #4b5563;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
+            opacity: 1;
+        }
+        .control-btn:disabled i {
+            color: #323c49 !important;
+        }
+        .control-btn:disabled:hover {
+            background: #d1d5db;
+            transform: none;
+            box-shadow: none;
+        }
+        .control-btn:disabled::before {
+            display: none;
         }
 
         .slide-counter {
@@ -1093,7 +1107,7 @@
     <div class="dots" id="dots" aria-label="التنقل بين الشرائح"></div>
 
     <div class="controls">
-        <button class="control-btn" id="prevBtn" onclick="changeSlide(-1)" title="الشريحة السابقة">
+        <button class="control-btn" id="prevBtn" onclick="changeSlide(-1)" title="الشريحة السابقة" disabled aria-disabled="true">
             <i class="fas fa-chevron-right" style="font-size: 1.2em;"></i>
         </button>
         <button class="control-btn play-btn" id="playBtn" onclick="toggleAutoPlay()" title="تشغيل تلقائي">
@@ -1139,8 +1153,8 @@
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
             
-            if (n > totalSlides) currentSlide = 1;
-            if (n < 1) currentSlide = totalSlides;
+            if (n > totalSlides) currentSlide = totalSlides;
+            if (n < 1) currentSlide = 1;
             
             // Pause any playing videos before switching slides
             document.querySelectorAll('video').forEach(v => {
@@ -1198,8 +1212,12 @@
                     if (currentSlide < totalSlides) {
                         changeSlide(1);
                     } else {
-                        currentSlide = 1;
-                        showSlide(currentSlide);
+                        // Stop autoplay at the last slide (no wrap-around)
+                        clearInterval(autoPlayInterval);
+                        playIcon.className = 'fas fa-play';
+                        playBtn.className = 'control-btn play-btn';
+                        playBtn.title = 'تشغيل تلقائي';
+                        isAutoPlaying = false;
                     }
                 }, 6000);
                 playIcon.className = 'fas fa-pause';
@@ -1299,8 +1317,8 @@
         function enhancedShowSlide(n) {
             // Ensure currentSlide reflects the requested slide index
             currentSlide = n;
-            if (currentSlide > totalSlides) { currentSlide = 1; }
-            if (currentSlide < 1) { currentSlide = totalSlides; }
+            if (currentSlide > totalSlides) { currentSlide = totalSlides; }
+            if (currentSlide < 1) { currentSlide = 1; }
             
             const slides = document.querySelectorAll('.slide');
             const currentActiveSlide = document.querySelector('.slide.active');
@@ -1354,6 +1372,12 @@
                 slideCounter.style.transform = 'translateY(0)';
             }, 200);
             
+            // Disable prev/next at bounds (no wrap-around)
+            const prevBtnEl = document.getElementById('prevBtn');
+            const nextBtnEl = document.getElementById('nextBtn');
+            if (prevBtnEl) prevBtnEl.disabled = currentSlide === 1;
+            if (nextBtnEl) nextBtnEl.disabled = currentSlide === totalSlides;
+
             updateDots();
         }
         
